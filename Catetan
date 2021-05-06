@@ -1,0 +1,8 @@
+# Customer 
+    - Jumlah permintaan
+    - plotting koordinat manual bebas
+    - Matriks jarak diambil dari maps (km)
+    - Hasil saving matriks dicari yang paling besar
+
+# Catetan :
+    - Misal ada saving matrix yang sama tapi belum terbentuk rute maka apakah diambil dari depot terdekat atau memperhatikan permintaan ?
