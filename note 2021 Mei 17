@@ -1,0 +1,19 @@
+# Note 
+- map
+- long lang
+- tarik garis linier yng penting bentuk jalur
+- number vehicle 1 buah
+- rute yang digunakan atau dijalankan bebas dari mana saja
+- sekenario paling buruk ketemu distance & rute
+- dua dimensi plotting mirip OR-Tools Google
+
+# Target Utama
+- Create Distance (DONE)
+- Create Dinamis Rute (PROGRESS)
+- Plotting 2 Dimensi Mirip OR-Tools
+
+# Target Selanjutnya
+- Plotting Map 
+- Ditarik Garis Linier Antar Customer
+- Jika Memungkinkan Sesuai Dengan Rute Map
+
