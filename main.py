@@ -83,9 +83,35 @@ class Rute:
         self.distance = Distance
 
     def create_rute(self):
-        # kurang build rute berdasar data saving
-        # print('Customer In Class Rute = ',str(self.customer[0]))
+        print('Customer In Class Rute = ',str(self.customer[0]))
         print('Distance In Class Rute = ',str(self.distance))
+
+        # temp_distance = []
+        # for i in range(len(self.distance)):
+        #     print('Item Max = ',max(self.distance[i]))
+        #     print('Index Row of Max ',(i+1))
+        #     print('Index Column of Max = ',(self.distance[i].index(max(self.distance[i]))+1))
+        #     print('Max = ',max(self.distance[i]),' Row = ',(i+1),' Column = ',(self.distance[i].index(max(self.distance[i]))+1))
+        #     temp_distance.append([max(self.distance[i]),(i+1),(self.distance[i].index(max(self.distance[i]))+1)])
+
+        # print('Before sorting = ',temp_distance)
+        # temp_distance.sort(reverse=True)
+        # print('After sorting = ',temp_distance)
+
+        temp_last_max_distance = []
+        temp_max_distance = []
+        for i in range(len(self.distance)):
+            print('Item Max = ',max(self.distance[i]))
+            print('Index Row of Max ',(i+1))
+            print('Index Column of Max = ',(self.distance[i].index(max(self.distance[i]))+1))
+            print('Max = ',max(self.distance[i]),' Row = ',(i+1),' Column = ',(self.distance[i].index(max(self.distance[i]))+1))
+            temp_max_distance.append([max(self.distance[i]),(i+1),(self.distance[i].index(max(self.distance[i]))+1)])
+
+        print('Before sorting = ',temp_max_distance)
+        temp_max_distance.sort(reverse=True)
+        print('After sorting = ',temp_max_distance)
+        print('Get max distance = ',temp_max_distance[0][0])
+
         rute = []
         return rute
 
