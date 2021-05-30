@@ -66,17 +66,11 @@ class Distance():
             data_distance_matrix.append(self.count_distance_customer_dinamic(starting_point))
             starting_point+=1
 
-        real_data_distance_matrix = [[self.depot for i in range(len(self.customer))] for x in range(len(self.customer))]
+        for i in data_distance_matrix:
+            for j in range(len(self.customer)-len(i)):
+                i.insert(j,0)
 
-        # kurang build ulang data saving
-        for i in range(len(data_distance_matrix)+1):
-            print('item = ',data_distance_matrix[i])
-
-        
-        
-        print('Real Saving Distance  = ',real_data_distance_matrix)
-
-        return real_data_distance_matrix
+        return data_distance_matrix
 
 # ini class untuk membangun rute terbaik berdasarkan jarak dan kapasitas
 class Rute:
@@ -90,7 +84,7 @@ class Rute:
 
     def create_rute(self):
         # kurang build rute berdasar data saving
-        print('Customer In Class Rute = ',str(self.customer[0]))
+        # print('Customer In Class Rute = ',str(self.customer[0]))
         print('Distance In Class Rute = ',str(self.distance))
         rute = []
         return rute
