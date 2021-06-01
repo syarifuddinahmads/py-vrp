@@ -3,48 +3,48 @@ class DataModel():
 
     def customer_data_model(self):
         customer = [
-            ('Richa',55),
-            ('Calvin',50),
-            ('Yono',50),
-            ('Tutik',55),
-            ('Febri',70),
-            ('Zahwa',45),
-            ('Cipto',60),
-            ('Eko',60),
-            ('Khamimah',40),
-            ('Mamik',35),
+            ('Richa', 55),
+            ('Calvin', 50),
+            ('Yono', 50),
+            ('Tutik', 55),
+            ('Febri', 70),
+            ('Zahwa', 45),
+            ('Cipto', 60),
+            ('Eko', 60),
+            ('Khamimah', 40),
+            ('Mamik', 35),
         ]
         return customer
 
     def create_distance_data_model(self):
         distance_matrix = [
-            [0,8.3,10.2,6.5,6.6,7.1,7.7,5.8,6.0,5.7,8.1],
-            [8.3,0,6.8,7.2,5.9,8.8,9.0,4.4,7.9,9.1,5.5],
-            [10.2,6.8,0,7.8,6.1,3.2,8.0,5.1,10.0,7.3,4.5],
-            [6.5,7.2,7.8,0,5.6,4.7,6.7,7.0,6.9,6.8,9.9],
-            [6.6,5.9,6.1,5.6,0,8.9,6.2,0.3,8.2,3.8,5.3],
-            [7.1,8.8,3.2,4.7,8.9,0,7.5,4.8,3.9,4.1,6.4],
-            [7.7,9.0,8.0,6.7,6.2,7.5,0,5.4,6.5,9.5,7.4],
-            [5.8,4.4,5.1,7.0,10.3,4.8,5.4,0,6.3,4.6,8.5],
-            [6.0,7.9,10.0,6.9,8.2,3.9,6.5,6.3,0,8.4,11.0],
-            [5.7,9.1,7.3,6.8,3.8,4.1,9.5,4.6,8.4,0,7.6],
-            [8.1,5.5,4.5,9.9,5.3,6.4,7.4,8.5,11.0,7.6,0],
+            [0, 8.3, 10.2, 6.5, 6.6, 7.1, 7.7, 5.8, 6.0, 5.7, 8.1],
+            [8.3, 0, 6.8, 7.2, 5.9, 8.8, 9.0, 4.4, 7.9, 9.1, 5.5],
+            [10.2, 6.8, 0, 7.8, 6.1, 3.2, 8.0, 5.1, 10.0, 7.3, 4.5],
+            [6.5, 7.2, 7.8, 0, 5.6, 4.7, 6.7, 7.0, 6.9, 6.8, 9.9],
+            [6.6, 5.9, 6.1, 5.6, 0, 8.9, 6.2, 0.3, 8.2, 3.8, 5.3],
+            [7.1, 8.8, 3.2, 4.7, 8.9, 0, 7.5, 4.8, 3.9, 4.1, 6.4],
+            [7.7, 9.0, 8.0, 6.7, 6.2, 7.5, 0, 5.4, 6.5, 9.5, 7.4],
+            [5.8, 4.4, 5.1, 7.0, 10.3, 4.8, 5.4, 0, 6.3, 4.6, 8.5],
+            [6.0, 7.9, 10.0, 6.9, 8.2, 3.9, 6.5, 6.3, 0, 8.4, 11.0],
+            [5.7, 9.1, 7.3, 6.8, 3.8, 4.1, 9.5, 4.6, 8.4, 0, 7.6],
+            [8.1, 5.5, 4.5, 9.9, 5.3, 6.4, 7.4, 8.5, 11.0, 7.6, 0],
         ]
         return distance_matrix
 
 
 # ini class untuk menghitung jarak dari depot ke customer
-class Distance():   
+class Distance():
 
     customer = []
     distance = []
     depot = 0
-    
-    def __init__(self,Customer,Distance):
+
+    def __init__(self, Customer, Distance):
         self.customer = Customer
         self.distance = Distance
 
-    def count_distance_customer_dinamic(self,counter):
+    def count_distance_customer_dinamic(self, counter):
         data_distance = self.distance
         leng_matrix = len(data_distance)
         counter_loop = counter+1
@@ -54,72 +54,87 @@ class Distance():
             y = data_distance[0][counter]
             xy = data_distance[counter_loop][counter]
             total_xy = x+y-xy
-            _data.append(round(total_xy,2))
-            
-            counter_loop+=1
+            _data.append(round(total_xy, 2))
+
+            counter_loop += 1
         return _data
-    
+
     def execute_distance(self):
         starting_point = 1
         data_distance_matrix = []
         while starting_point < len(self.distance)-1:
-            data_distance_matrix.append(self.count_distance_customer_dinamic(starting_point))
-            starting_point+=1
+            data_distance_matrix.append(
+                self.count_distance_customer_dinamic(starting_point))
+            starting_point += 1
 
         for i in data_distance_matrix:
             for j in range(len(self.customer)-len(i)):
-                i.insert(j,0)
+                i.insert(j, 0)
 
         return data_distance_matrix
 
 # ini class untuk membangun rute terbaik berdasarkan jarak dan kapasitas
+
+
 class Rute:
 
     customer = []
     distance = []
 
-    def __init__(self,Customer,Distance):
+    def __init__(self, Customer, Distance):
         self.customer = Customer
         self.distance = Distance
 
     def create_rute(self):
-        print('Customer In Class Rute = ',str(self.customer[0]))
-        print('Distance In Class Rute = ',str(self.distance))
 
-        # temp_distance = []
-        # for i in range(len(self.distance)):
-        #     print('Item Max = ',max(self.distance[i]))
-        #     print('Index Row of Max ',(i+1))
-        #     print('Index Column of Max = ',(self.distance[i].index(max(self.distance[i]))+1))
-        #     print('Max = ',max(self.distance[i]),' Row = ',(i+1),' Column = ',(self.distance[i].index(max(self.distance[i]))+1))
-        #     temp_distance.append([max(self.distance[i]),(i+1),(self.distance[i].index(max(self.distance[i]))+1)])
-
-        # print('Before sorting = ',temp_distance)
-        # temp_distance.sort(reverse=True)
-        # print('After sorting = ',temp_distance)
-
-        temp_last_max_distance = []
-        temp_max_distance = []
-        for i in range(len(self.distance)):
-            print('Item Max = ',max(self.distance[i]))
-            print('Index Row of Max ',(i+1))
-            print('Index Column of Max = ',(self.distance[i].index(max(self.distance[i]))+1))
-            print('Max = ',max(self.distance[i]),' Row = ',(i+1),' Column = ',(self.distance[i].index(max(self.distance[i]))+1))
-            temp_max_distance.append([max(self.distance[i]),(i+1),(self.distance[i].index(max(self.distance[i]))+1)])
-
-        print('Before sorting = ',temp_max_distance)
-        temp_max_distance.sort(reverse=True)
-        print('After sorting = ',temp_max_distance)
-        print('Get max distance = ',temp_max_distance[0][0])
+        temp_distance = []
+        for i in self.distance:
+            for j in i:
+                if j != 0:
+                    temp_distance.append(j)
+        temp_distance.sort(reverse=True)
+        print('Temp Distance = ', temp_distance)
 
         rute = []
+        max_capacity = 225
+        counter = 0
+        temp_rute = []
+        while counter < len(temp_distance):
+            print('Item Distance = ', temp_distance[counter])
+            max_distance = temp_distance[counter]
+            for index, k in enumerate(self.distance):
+                if max_distance in k:
+                    print('Row = ', (index+1), ' Column = ',
+                          (k.index(max_distance)+1))
+                    node_one = (index+1)
+                    node_two = (k.index(max_distance)+1)
+                    if len(temp_rute) == 0:
+                        temp_rute.extend([node_one, node_two])
+                    else:
+                        if node_one in temp_rute:
+                            print('Node = ', node_one,
+                                      ' Sudah ada di ', temp_rute)
+                        else:
+                            temp_rute.append(node_one)
+
+                        if node_two in temp_rute:
+                            print('Node = ', node_two,
+                                      ' Sudah ada di ', temp_rute)
+                        else:
+                            temp_rute.append(node_two)
+
+                        if node_one and node_two in temp_rute:
+                            print('Kedua node sudah ada di ', temp_rute)
+                        else:
+                            print('Kedua node belum ada di ', temp_rute)
+                            
+            counter += 1
+
         return rute
 
-    def find_ma_distance(self):
-        
-        return 
 
 data = DataModel()
-distance = Distance(data.customer_data_model(),data.create_distance_data_model())
-rute = Rute(data.customer_data_model(),distance.execute_distance())
-print("Rute = ",rute.create_rute())
+distance = Distance(data.customer_data_model(),
+                    data.create_distance_data_model())
+rute = Rute(data.customer_data_model(), distance.execute_distance())
+print("Rute = ", rute.create_rute())
