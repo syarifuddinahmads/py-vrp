@@ -85,7 +85,7 @@ class Rute:
         self.customer = Customer
         self.distance = Distance
 
-    def create_rute(self):
+    def create_node(self):
 
         temp_distance = []
         for i in self.distance:
@@ -93,14 +93,12 @@ class Rute:
                 if j != 0:
                     temp_distance.append(j)
         temp_distance.sort(reverse=True)
-        print('Temp Distance = ', temp_distance)
+        # print('Temp Distance = ', temp_distance)
 
-        rute = []
-        max_capacity = 225
+        
         counter = 0
-        temp_rute = []
+        temp_node = []
         while counter < len(temp_distance):
-            print('Item Distance = ', temp_distance[counter])
             max_distance = temp_distance[counter]
             for index, k in enumerate(self.distance):
                 if max_distance in k:
@@ -108,33 +106,54 @@ class Rute:
                           (k.index(max_distance)+1))
                     node_one = (index+1)
                     node_two = (k.index(max_distance)+1)
-                    if len(temp_rute) == 0:
-                        temp_rute.extend([node_one, node_two])
+                    if len(temp_node) == 0:
+                        temp_node.extend([node_one, node_two])
                     else:
-                        if node_one in temp_rute:
+                        if node_one in temp_node:
                             print('Node = ', node_one,
-                                      ' Sudah ada di ', temp_rute)
+                                  ' Sudah ada di ', temp_node)
                         else:
-                            temp_rute.append(node_one)
+                            temp_node.append(node_one)
 
-                        if node_two in temp_rute:
-                            print('Node = ', node_two,
-                                      ' Sudah ada di ', temp_rute)
+                        if node_two in temp_node:
+                            print('Node = ', node_two,' Sudah ada di ', temp_node)
                         else:
-                            temp_rute.append(node_two)
+                            temp_node.append(node_two)
 
-                        if node_one and node_two in temp_rute:
-                            print('Kedua node sudah ada di ', temp_rute)
+                        if node_one and node_two in temp_node:
+                            print('Kedua node sudah ada di ', temp_node)
                         else:
-                            print('Kedua node belum ada di ', temp_rute)
-                            
+                            # print('Kedua node belum ada di ', temp_node)
+                            temp_node.extend([node_one, node_two])
+
             counter += 1
 
+        return temp_node
+
+    def create_rute(self, index):
+        node = self.create_node()
+        counter = index
+        rute = []
+        max_capacity = 225
+        temp_rute = []
+        order_capacity = 0
+        while counter < len(node):
+            order_capacity += self.customer[node[counter]-1][1]
+            print('Order Capacity = ',order_capacity)
+            temp_rute.append(node[counter])
+            print('Temp Rute = ',temp_rute)
+            counter+=1
+        
         return rute
+
+
+
+    
+    
 
 
 data = DataModel()
 distance = Distance(data.customer_data_model(),
                     data.create_distance_data_model())
 rute = Rute(data.customer_data_model(), distance.execute_distance())
-print("Rute = ", rute.create_rute())
+print("Rute = ", rute.create_rute(0))
