@@ -74,8 +74,6 @@ class Distance():
         return data_distance_matrix
 
 # ini class untuk membangun rute terbaik berdasarkan jarak dan kapasitas
-
-
 class Rute:
 
     customer = []
@@ -94,7 +92,6 @@ class Rute:
                 if j != 0:
                     temp_distance.append(j)
         temp_distance.sort(reverse=True)
-        # print('Temp Distance = ', temp_distance)
 
         counter = 0
         temp_node = []
@@ -102,35 +99,18 @@ class Rute:
             max_distance = temp_distance[counter]
             for index, k in enumerate(self.distance):
                 if max_distance in k:
-                    # print('Row = ', (index+1), ' Column = ',
-                    #       (k.index(max_distance)+1))
                     node_one = (index+1)
                     node_two = (k.index(max_distance)+1)
                     if len(temp_node) == 0:
                         temp_node.extend([node_one, node_two])
                     else:
-                        # if node_one in temp_node:
-                        #     print('Node = ', node_one,
-                        #           ' Sudah ada di ', temp_node)
-                        # else:
-                        #     temp_node.append(node_one)
 
                         if node_one not in temp_node:
                             temp_node.append(node_one)
 
-                        # if node_two in temp_node:
-                        #     print('Node = ', node_two,' Sudah ada di ', temp_node)
-                        # else:
-                        #     temp_node.append(node_two)
-
                         if node_two not in temp_node:
                             temp_node.append(node_two)
 
-                        # if node_one and node_two in temp_node:
-                        #     print('Kedua node sudah ada di ', temp_node)
-                        # else:
-                        #     # print('Kedua node belum ada di ', temp_node)
-                        #     temp_node.extend([node_one, node_two])
                         if node_one and node_two not in temp_node:
                             temp_node.extend([node_one, node_two])
 
@@ -144,13 +124,9 @@ class Rute:
         order_capacity = 0
         temp_node = []
 
-        # print('Index start loop', index, 'Length Node = ', len(node))
-            
         for i in node[index:len(node)]:
             order_capacity += self.customer[i-1][1]
-            # print('Index = ',node.index(i),'Index Recursion = ',index,' Node = ',i,' Capacity = ',self.customer[i-1][1],' Order Capacity = ',order_capacity)
             if order_capacity >= max_capacity:
-                # print('Index node max capacity = ', node.index(i))
                 self.rute.append(temp_node)
                 self.create_rute(node.index(i))
                 break
@@ -161,21 +137,13 @@ class Rute:
                 self.rute.append(temp_node)
                 break
 
-        # for i in node[0:4]:
-        #     print('Node ',i,' Index ',node.index(i))
-
-        # print('=================')
-
-        # for i in node[4:8]:
-        #     print('Node ',i,' Index ',node.index(i))
-
-        # print('=================')
-
-        
-        # for i in node[8:len(node)]:
-        #     print('Node ',i,' Index ',node.index(i))
-
         return self.rute
+    
+    def nearest_insert(self):
+        return True
+
+    def nearest_neighbor(self):
+        return True
 
 
 data = DataModel()
