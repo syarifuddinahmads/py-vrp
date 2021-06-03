@@ -80,6 +80,7 @@ class Rute:
 
     customer = []
     distance = []
+    rute = []
 
     def __init__(self, Customer, Distance):
         self.customer = Customer
@@ -95,7 +96,6 @@ class Rute:
         temp_distance.sort(reverse=True)
         # print('Temp Distance = ', temp_distance)
 
-        
         counter = 0
         temp_node = []
         while counter < len(temp_distance):
@@ -140,103 +140,42 @@ class Rute:
 
     def create_rute(self, index):
         node = self.create_node()
-        # rute = []
         max_capacity = 225
         order_capacity = 0
         temp_node = []
 
-        # while counter < len(node):
-        #     # order_capacity += self.customer[node[counter]-1][1]
-        #     # print('Order Capacity = ',order_capacity)
-        #     # temp_rute.append(node[counter])
-        #     # print('Temp Rute = ',temp_rute)
-        #     # counter+=1
-        #     temp_node = []
-        #     for i in node:
-        #         order_capacity += self.customer[i-1][1]
-        #         if order_capacity <= max_capacity:
-        #             temp_node.append(i)
-        #         else:
-        #             rute.append(temp_node)
-        #             counter += 1
+        # print('Index start loop', index, 'Length Node = ', len(node))
+            
+        for i in node[index:len(node)]:
+            order_capacity += self.customer[i-1][1]
+            # print('Index = ',node.index(i),'Index Recursion = ',index,' Node = ',i,' Capacity = ',self.customer[i-1][1],' Order Capacity = ',order_capacity)
+            if order_capacity >= max_capacity:
+                # print('Index node max capacity = ', node.index(i))
+                self.rute.append(temp_node)
+                self.create_rute(node.index(i))
+                break
+            else:
+                temp_node.append(i)
 
-        # print('Index start loop',index)
-        # temp_node = []
-        # for i in node[index:len(node)]:
-        #     order_capacity += self.customer[i-1][1]
-        #     print('Order capacity = ',order_capacity)
-        #     if order_capacity > max_capacity:
-        #         rute.append(temp_node)
-        #         self.create_rute(node.index(i))
-        #     else:
-        #         temp_node.append(i)
+            if node.index(i) == (len(node)-1):
+                self.rute.append(temp_node)
+                break
 
-        # for i in node[0:4]:
-        #     order_capacity += self.customer[i-1][1]
-        #     print('Order capacity = ',order_capacity)
-        #     print('I = ',i)
-
-        # counter = index
-        # temp_node = []
-        # while counter < len(node):
-        #     order_capacity += self.customer[counter][1]
-        #     print('Customer = ',self.customer[counter][0],'Order Customer = ',self.customer[counter][1])
-        #     print('Order capacity = ',order_capacity)
-        #     if order_capacity > max_capacity:
-        #         rute.append(temp_node)
-        #         temp_node = []
-        #         self.create_rute(counter+1)
-        #         counter+=1
-        #     else:
-        #         temp_node.append(node[counter])
-        #     counter+=1
-
-        # temp_node = []
-        # for i in range(index,len(node)):
-        #     order_capacity += self.customer[i-1][1]
-        #     print('Order capacity = ',order_capacity)
-        #     if order_capacity > max_capacity:
-        #         rute.append(temp_node)
-        #         self.create_rute(node.index(i))
-        #     else:
-        #         temp_node.append(i)
-        
         # for i in node[0:4]:
         #     print('Node ',i,' Index ',node.index(i))
 
         # print('=================')
-        
+
         # for i in node[4:8]:
         #     print('Node ',i,' Index ',node.index(i))
 
         # print('=================')
+
         
         # for i in node[8:len(node)]:
         #     print('Node ',i,' Index ',node.index(i))
-        
-        # print('=================')
-        
-        # for i in node[0:len(node)]:
-        #     print('Node ',i,' Index ',node.index(i))
-        # order_capacity = 0
-        # for i in node[index:len(node)]:
-        #     print('Node ',i,' Index ',node.index(i))
-        #     order_capacity += self.customer[node.index(i)][1]
-        #     print('Order capacity = ',order_capacity)
-        #     if order_capacity <= max_capacity:
-        #         temp_node.append(i)
-        #     else:
-        #         rute.append(temp_node)
-        #         self.create_rute(node.index(i),indexrute+1)
- 
-        
-                
-        return temp_node
 
-
-
-    
-    
+        return self.rute
 
 
 data = DataModel()
