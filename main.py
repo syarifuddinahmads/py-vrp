@@ -102,28 +102,36 @@ class Rute:
             max_distance = temp_distance[counter]
             for index, k in enumerate(self.distance):
                 if max_distance in k:
-                    print('Row = ', (index+1), ' Column = ',
-                          (k.index(max_distance)+1))
+                    # print('Row = ', (index+1), ' Column = ',
+                    #       (k.index(max_distance)+1))
                     node_one = (index+1)
                     node_two = (k.index(max_distance)+1)
                     if len(temp_node) == 0:
                         temp_node.extend([node_one, node_two])
                     else:
-                        if node_one in temp_node:
-                            print('Node = ', node_one,
-                                  ' Sudah ada di ', temp_node)
-                        else:
+                        # if node_one in temp_node:
+                        #     print('Node = ', node_one,
+                        #           ' Sudah ada di ', temp_node)
+                        # else:
+                        #     temp_node.append(node_one)
+
+                        if node_one not in temp_node:
                             temp_node.append(node_one)
 
-                        if node_two in temp_node:
-                            print('Node = ', node_two,' Sudah ada di ', temp_node)
-                        else:
+                        # if node_two in temp_node:
+                        #     print('Node = ', node_two,' Sudah ada di ', temp_node)
+                        # else:
+                        #     temp_node.append(node_two)
+
+                        if node_two not in temp_node:
                             temp_node.append(node_two)
 
-                        if node_one and node_two in temp_node:
-                            print('Kedua node sudah ada di ', temp_node)
-                        else:
-                            # print('Kedua node belum ada di ', temp_node)
+                        # if node_one and node_two in temp_node:
+                        #     print('Kedua node sudah ada di ', temp_node)
+                        # else:
+                        #     # print('Kedua node belum ada di ', temp_node)
+                        #     temp_node.extend([node_one, node_two])
+                        if node_one and node_two not in temp_node:
                             temp_node.extend([node_one, node_two])
 
             counter += 1
@@ -132,19 +140,98 @@ class Rute:
 
     def create_rute(self, index):
         node = self.create_node()
-        counter = index
-        rute = []
+        # rute = []
         max_capacity = 225
-        temp_rute = []
         order_capacity = 0
-        while counter < len(node):
-            order_capacity += self.customer[node[counter]-1][1]
-            print('Order Capacity = ',order_capacity)
-            temp_rute.append(node[counter])
-            print('Temp Rute = ',temp_rute)
-            counter+=1
+        temp_node = []
+
+        # while counter < len(node):
+        #     # order_capacity += self.customer[node[counter]-1][1]
+        #     # print('Order Capacity = ',order_capacity)
+        #     # temp_rute.append(node[counter])
+        #     # print('Temp Rute = ',temp_rute)
+        #     # counter+=1
+        #     temp_node = []
+        #     for i in node:
+        #         order_capacity += self.customer[i-1][1]
+        #         if order_capacity <= max_capacity:
+        #             temp_node.append(i)
+        #         else:
+        #             rute.append(temp_node)
+        #             counter += 1
+
+        # print('Index start loop',index)
+        # temp_node = []
+        # for i in node[index:len(node)]:
+        #     order_capacity += self.customer[i-1][1]
+        #     print('Order capacity = ',order_capacity)
+        #     if order_capacity > max_capacity:
+        #         rute.append(temp_node)
+        #         self.create_rute(node.index(i))
+        #     else:
+        #         temp_node.append(i)
+
+        # for i in node[0:4]:
+        #     order_capacity += self.customer[i-1][1]
+        #     print('Order capacity = ',order_capacity)
+        #     print('I = ',i)
+
+        # counter = index
+        # temp_node = []
+        # while counter < len(node):
+        #     order_capacity += self.customer[counter][1]
+        #     print('Customer = ',self.customer[counter][0],'Order Customer = ',self.customer[counter][1])
+        #     print('Order capacity = ',order_capacity)
+        #     if order_capacity > max_capacity:
+        #         rute.append(temp_node)
+        #         temp_node = []
+        #         self.create_rute(counter+1)
+        #         counter+=1
+        #     else:
+        #         temp_node.append(node[counter])
+        #     counter+=1
+
+        # temp_node = []
+        # for i in range(index,len(node)):
+        #     order_capacity += self.customer[i-1][1]
+        #     print('Order capacity = ',order_capacity)
+        #     if order_capacity > max_capacity:
+        #         rute.append(temp_node)
+        #         self.create_rute(node.index(i))
+        #     else:
+        #         temp_node.append(i)
         
-        return rute
+        # for i in node[0:4]:
+        #     print('Node ',i,' Index ',node.index(i))
+
+        # print('=================')
+        
+        # for i in node[4:8]:
+        #     print('Node ',i,' Index ',node.index(i))
+
+        # print('=================')
+        
+        # for i in node[8:len(node)]:
+        #     print('Node ',i,' Index ',node.index(i))
+        
+        # print('=================')
+        
+        # for i in node[0:len(node)]:
+        #     print('Node ',i,' Index ',node.index(i))
+        # order_capacity = 0
+        # for i in node[index:len(node)]:
+        #     print('Node ',i,' Index ',node.index(i))
+        #     order_capacity += self.customer[node.index(i)][1]
+        #     print('Order capacity = ',order_capacity)
+        #     if order_capacity <= max_capacity:
+        #         temp_node.append(i)
+        #     else:
+        #         rute.append(temp_node)
+        #         self.create_rute(node.index(i),indexrute+1)
+ 
+        
+                
+        return temp_node
 
 
 
